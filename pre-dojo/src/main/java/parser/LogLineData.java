@@ -3,14 +3,21 @@ package parser;
 /**
  * @author edneyroldao
  */
-public class Data {
+public class LogLineData {
 
 	// Attributes
+	private String actionTime;
 	private String killerName;
 	private String deadName;
 	private String weaponName;
 	
 	// Getters and Setters
+	public String getActionTime() {
+		return actionTime;
+	}
+	public void setActionTime(String actionTime) {
+		this.actionTime = actionTime;
+	}
 	public String getKillerName() {
 		return killerName;
 	}

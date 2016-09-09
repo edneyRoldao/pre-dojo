@@ -5,29 +5,27 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import util.ReadAndWriteFileUtil;
-
 /**
  * @author edneyroldao
  */
 public class LogFileMatchParser {
 
-	// Attributes
-	private final String filePath;
-	private List<String> formattedResultList;
+	// Attribute
+	private final List<String> logResultList;
 	
 	// Constructor
-	public LogFileMatchParser(String filePath) {
-		this.filePath = filePath;
-		formattedResultList = listFormatter();
+	public LogFileMatchParser(List<String> logResultList) {
+		this.logResultList = logResultList;
 	}
 	
-	public List<Data> getDataList() {
-		List<Data> list = new ArrayList<>();
+	
+	public List<LogLineData> getParsedList() {
+		List<LogLineData> list = new ArrayList<>();
 		
-		for(String s : formattedResultList) {
-			if(! isStrifeLine(s)) {
-				Data data = new Data();
+		for(String s : logResultList) {
+			if(! isNotStrifeLine(s)) {
+				LogLineData data = new LogLineData();
+				data.setActionTime(retrieveActionTime(s));
 				data.setKillerName(retrieveKillerName(s));
 				data.setDeadName(retrieveDeadName(s));
 				data.setWeaponName(retrieveWeaponName(s));
@@ -42,8 +40,9 @@ public class LogFileMatchParser {
 		Matcher matcher = null;
 		StringBuilder sb = new StringBuilder();
 		
-		for(String s : formattedResultList) {
-			matcher = Pattern.compile("\\d").matcher(s);
+		for(String s : logResultList) {
+			String[] token = s.split("-");
+			matcher = Pattern.compile("\\d").matcher(token[1]);
 			
 			while(matcher.find())
 				sb.append(matcher.group());
@@ -54,17 +53,9 @@ public class LogFileMatchParser {
 		return 0;
 	}
 	
-	private List<String> listFormatter() {
-		List<String> resultList = ReadAndWriteFileUtil.readLogFile(filePath);
-		
-		List<String> list = new ArrayList<>();
-		
-		for(String s : resultList) {
-			String[] token = s.split("-");
-			list.add(token[1].trim());
-		}
-		
-		return list;
+	private String retrieveActionTime(String line) {
+		String[] token = line.split("-");
+		return token[0].trim();
 	}
 	
 	private String retrieveWeaponName(String line) {
@@ -78,11 +69,12 @@ public class LogFileMatchParser {
 	}
 	
 	private String retrieveKillerName(String line) {
-		int index = line.indexOf("killed");
-		return line.substring(0, index).trim();
+		String[] token = line.split("-");
+		int index = token[1].indexOf("killed");
+		return token[1].substring(0, index).trim();
 	}
 	
-	private boolean isStrifeLine(String line) {
+	private boolean isNotStrifeLine(String line) {
 		Matcher m = Pattern.compile("(?i)match").matcher(line);
 		return m.find();
 	}

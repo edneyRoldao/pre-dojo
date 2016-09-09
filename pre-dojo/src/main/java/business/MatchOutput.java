@@ -92,7 +92,7 @@ public class MatchOutput extends Match {
 	 * Add an interval between each death
 	 */
 	private void addInterval() {
-		long interval = 1000 + rd.nextInt(3000);
+		long interval = 1000 + rd.nextInt(6000);
 		try {
 			Thread.sleep(interval);
 		} catch (InterruptedException e) {

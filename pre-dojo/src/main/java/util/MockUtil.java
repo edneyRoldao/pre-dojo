@@ -28,9 +28,11 @@ public class MockUtil {
 	public static List<Killer> getKillerList() {
 	
 		List<Killer> killers = new ArrayList<>();
+		killers.add(new Soldier("<WORLD>"));
 		killers.add(new Ninja("Roman Reigns"));
 		killers.add(new Soldier("Kevin Owens"));
-		killers.add(new Soldier("<WORLD>"));
+		killers.add(new Ninja("Seth Rollins"));
+		killers.add(new Soldier("The Undertaker"));
 
 		return killers;
 	}

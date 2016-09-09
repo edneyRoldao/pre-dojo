@@ -1,8 +1,11 @@
 package models;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import interfaces.Ability;
+import util.MapUtil;
 
 /**
  * @author edneyroldao
@@ -15,11 +18,12 @@ public abstract class Killer implements Serializable, Comparable<Killer>, Abilit
 	
 	// Attributes
 	private String name;
-	private String weaponNameMoreUsed;
+	private Map<String, Integer> weapons = new HashMap<>();
 	private int damagePoint;
 	private int deathsNumber;
 	private int murdersNumber;
 	private int awardNumber;
+	private int murderSequence;
 	
 	// Constructor
 	public Killer(String name, int damagePoint) {
@@ -37,17 +41,20 @@ public abstract class Killer implements Serializable, Comparable<Killer>, Abilit
 		this.name = name;
 	}
 
-	public String getWeaponNameMoreUsed() {
-		return weaponNameMoreUsed;
+	public Map<String, Integer> getWeapons() {
+		return weapons;
 	}
 	
-	public void setWeaponNameMoreUsed(String weaponNameMoreUsed) {
-		this.weaponNameMoreUsed = weaponNameMoreUsed;
-	}
 	
+	public void setWeapons(Map<String, Integer> weapons) {
+		this.weapons = MapUtil.sortByValue(weapons);
+	}
+
 	public int getDamagePoint() {
 		return damagePoint;
 	}
+
+
 
 	public void setDamagePoint(int damagePoint) {
 		this.damagePoint = damagePoint;
@@ -77,9 +84,17 @@ public abstract class Killer implements Serializable, Comparable<Killer>, Abilit
 		this.awardNumber = awardNumber;
 	}
 
+	public int getMurderSequence() {
+		return murderSequence;
+	}
+	
+	public void setMurderSequence(int murderSequence) {
+		this.murderSequence = murderSequence;
+	}
+	
 	@Override
 	public int compareTo(Killer other) {
 		return this.name.compareToIgnoreCase(other.name);
 	}
-
+	
 }
