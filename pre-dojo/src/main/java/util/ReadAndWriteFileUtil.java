@@ -62,7 +62,8 @@ public class ReadAndWriteFileUtil {
 			String line = null;
 			
 			while((line = br.readLine()) != null)
-				list.add(line);
+				if(!line.equals(""))
+					list.add(line);
 			
 		} catch(IOException e) {
 			e.printStackTrace();

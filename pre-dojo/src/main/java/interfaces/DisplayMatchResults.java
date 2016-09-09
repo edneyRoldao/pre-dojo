@@ -7,7 +7,8 @@ public interface DisplayMatchResults {
 	List<String> getMurdersRanking();
 	List<String> getDeadRanking();
 	String getBestWeaponFromWinner();
-	String getGreaterMurdersSequenceBeforeDeath();
-	List<String> getAwardsEarnedRanking();
+	List<String> getGreaterMurdersSequenceBeforeDeath();
+	List<String> getAwardsEarnedByFiveMurders();
+	List<String> getAwardsEarnedByMatchWithoutDeath();
 	
 }

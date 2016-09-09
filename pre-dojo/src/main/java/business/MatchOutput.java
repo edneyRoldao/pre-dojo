@@ -73,15 +73,14 @@ public class MatchOutput extends Match {
 			}
 			
 			if(killer02.getDamagePoint() <= 0) {
-				String action = " - " + killer01.getName() + " killed " + killer02.getName() + " using " + weapon.getName() + "\n";
+				String action = DateUtil.getFormattedDate().toString() + " - " + killer01.getName() + " killed " + killer02.getName() + " using " + weapon.getName() + "\n";
 				System.out.println(action + "\n");
-				sb.append(DateUtil.getFormattedDate().toString() + action);
+				sb.append(action);
 				addInterval();
 				
 				Deadkillers.add(killer02);
 				getKillers().remove(killer02);
 			}
-			
 		}
 
 		getKillers().addAll(Deadkillers);

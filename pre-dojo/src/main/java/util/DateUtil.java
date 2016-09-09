@@ -15,6 +15,7 @@ public class DateUtil {
 
 	public static Calendar stringToCalendar(String date) {
 		Calendar calendar = Calendar.getInstance();
+		
 		try {
 			Date d = sdf.parse(date);
 			calendar.setTime(d);
@@ -23,6 +24,5 @@ public class DateUtil {
 		}
 		return calendar;
 	}
-	
 	
 }

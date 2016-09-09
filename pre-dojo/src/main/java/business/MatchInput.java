@@ -3,10 +3,8 @@ package business;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import models.Killer;
 import models.Ninja;
@@ -40,7 +38,7 @@ public class MatchInput extends Match {
 		countDeaths();
 		addAwardKillerNotDead();
 		setGreatMurderSequence();
-		addAwardFiveMurders();
+		addAwardFiveMurdersInOneMinute();
 		setKillers(killers);
 		addPreferedWeapon();
 	}
@@ -109,8 +107,8 @@ public class MatchInput extends Match {
 	public void addAwardKillerNotDead() {
 		for (int i = 0; i < killers.size(); i++) {
 			if (killerHasNotDeath(killers.get(i).getName())) {
-				int awards = killers.get(i).getAwardNumber();
-				killers.get(i).setAwardNumber(awards + 1);
+				int awards = killers.get(i).getAwardMatchWithoutDeath();
+				killers.get(i).setAwardMatchWithoutDeath(awards + 1);
 			}
 
 		}
@@ -142,12 +140,14 @@ public class MatchInput extends Match {
 		int sequence = 0;
 
 		for (LogLineData d : dataList) {
+			
 			if (killer.equals(d.getKillerName())) {
 				sequence += 1;
-			} else {
+			} else if(killer.equals(d.getDeadName())) {
 				murders.add(sequence);
 				sequence = 0;
 			}
+			murders.add(sequence);
 		}
 
 		Collections.sort(murders);
@@ -158,11 +158,10 @@ public class MatchInput extends Match {
 	/**
 	 * Add awards when the killer has five murders in a minute.
 	 */
-	public void addAwardFiveMurders() {
+	public void addAwardFiveMurdersInOneMinute() {
 		for (int i = 0; i < killers.size(); i++) {
 			int awards = getAwardsFiveMurdersOneMinute(killers.get(i).getName());
-			int award = killers.get(i).getAwardNumber();
-			killers.get(i).setAwardNumber(award + awards);
+			killers.get(i).setAwardFiveMurdersOneMinute(awards);
 		}
 	}
 
@@ -172,15 +171,19 @@ public class MatchInput extends Match {
 		int awards = 0;
 
 		while (!dataSubList.isEmpty()) {
+			
 			Calendar calendar = DateUtil.stringToCalendar(dataSubList.get(0).getActionTime());
 			calendar.add(Calendar.MINUTE, 1);
 			List<LogLineData> subList = new ArrayList<>();
+			List<LogLineData> smallList = new ArrayList<>();
 			int countMurder = 0;
 
 			for (LogLineData d : dataSubList) {
 				Calendar c = DateUtil.stringToCalendar(d.getActionTime());
 				if (c.compareTo(calendar) <= 0) {
 					subList.add(d);
+				}else {
+					smallList.add(d);
 				}
 			}
 
@@ -192,7 +195,11 @@ public class MatchInput extends Match {
 			if (countMurder >= 5)
 				awards += 1;
 
-			dataSubList.removeAll(subList);
+			if(smallList.size() == 1) {
+				dataSubList.remove(smallList.get(0));
+			}else {
+				dataSubList = smallList;
+			}
 		}
 
 		return awards;
@@ -204,14 +211,42 @@ public class MatchInput extends Match {
 	 */
 	public void addPreferedWeapon() {
 		for(int i = 0; i < killers.size(); i++) {
-			final List<Entry<String, Integer>> entries = new ArrayList<Entry<String, Integer>>(
-					killers.get(i).getWeapons().entrySet());
-			Entry<String, Integer> lastEntry = entries.get(entries.size() - 1);
-			Map<String, Integer> entry = new HashMap<>();
-			entry.put(lastEntry.getKey(), lastEntry.getValue());
 			
-			killers.get(i).setWeapons(entry);
+			List<String> list = new ArrayList<>();
+			
+			for(String key : killers.get(i).getWeapons().keySet()) {
+				list.add(killers.get(i).getWeapons().get(key) + ";" + key);
+			}
+			
+			Comparator<String> comp = (s1, s2) -> {
+				return s1.compareTo(s2);
+			};
+			
+			Collections.sort(list, Collections.reverseOrder(comp));
+			List<String> list2 = new ArrayList<>();
+			
+			if(!list.isEmpty()) {
+				int control = extractNumberFromText(list.get(0));
+				
+				list.forEach(s -> {
+					if(extractNumberFromText(s) == control)
+						list2.add(s);
+				});
+			}
+			
+			
+			killers.get(i).setWeaponMoreUsed(list2);
 		}
 	}
 
+	// Support method ( addPreferedWeapon() )
+	private int extractNumberFromText(String value) {
+		if(!value.isEmpty()) {
+			String[] token = value.split(";");
+			String number = token[0].trim();
+			return Integer.valueOf(number);
+		}
+		return 0;
+	}
+	
 }

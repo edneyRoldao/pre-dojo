@@ -2,6 +2,7 @@ package models;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import interfaces.Ability;
@@ -22,8 +23,10 @@ public abstract class Killer implements Serializable, Comparable<Killer>, Abilit
 	private int damagePoint;
 	private int deathsNumber;
 	private int murdersNumber;
-	private int awardNumber;
+	private int awardFiveMurdersOneMinute;
 	private int murderSequence;
+	private int awardMatchWithoutDeath;
+	private List<String> weaponMoreUsed;
 	
 	// Constructor
 	public Killer(String name, int damagePoint) {
@@ -76,12 +79,12 @@ public abstract class Killer implements Serializable, Comparable<Killer>, Abilit
 		this.murdersNumber = murdersNumber;
 	}
 
-	public int getAwardNumber() {
-		return awardNumber;
+	public int getAwardFiveMurdersOneMinute() {
+		return awardFiveMurdersOneMinute;
 	}
 
-	public void setAwardNumber(int awardNumber) {
-		this.awardNumber = awardNumber;
+	public void setAwardFiveMurdersOneMinute(int awardFiveMurdersOneMinute) {
+		this.awardFiveMurdersOneMinute = awardFiveMurdersOneMinute;
 	}
 
 	public int getMurderSequence() {
@@ -90,6 +93,22 @@ public abstract class Killer implements Serializable, Comparable<Killer>, Abilit
 	
 	public void setMurderSequence(int murderSequence) {
 		this.murderSequence = murderSequence;
+	}
+	
+	public int getAwardMatchWithoutDeath() {
+		return awardMatchWithoutDeath;
+	}
+	
+	public void setAwardMatchWithoutDeath(int awardMatchWithoutDeath) {
+		this.awardMatchWithoutDeath = awardMatchWithoutDeath;
+	}
+	
+	public List<String> getWeaponMoreUsed() {
+		return weaponMoreUsed;
+	}
+
+	public void setWeaponMoreUsed(List<String> weaponMoreUsed) {
+		this.weaponMoreUsed = weaponMoreUsed;
 	}
 	
 	@Override

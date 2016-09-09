@@ -64,28 +64,29 @@ public class MatchResultRankingService implements DisplayMatchResults {
 
 	@Override
 	public String getBestWeaponFromWinner() {
+		StringBuilder sb = new StringBuilder();
 		
 		Comparator<Killer> murderComparator = (k1, k2) -> {
 			Integer murders = k1.getMurdersNumber(); 
 			return murders.compareTo(k2.getMurdersNumber());
 		};
 
-		match.getKillers().sort(murderComparator);
+		Collections.sort(match.getKillers(), Collections.reverseOrder(murderComparator));
+		Killer k = match.getKillers().get(0);
 		
-		int index = match.getKillers().size() - 1;
-		Killer k = match.getKillers().get(index);
+		sb.append("Winner name: " + k.getName() + "\n");
 		
-		String weapon = "";
+		k.getWeaponMoreUsed().forEach(s -> {
+			String[] token = s.split(";");
+			sb.append("Weapon more used: " + token[1].trim() + " Weapon more used: ( " + token[0].trim() + " )" + "\n");
+		});
 		
-		for(String key : k.getWeapons().keySet()) {
-			weapon = key + "  murders number: ( " + k.getWeapons().get(key) + " )";
-		}
-		
-		return new String("Winner name: " + k.getName() + "  -  Weapon more used: " + weapon);
+		return sb.toString();
 	}
 
 	@Override
-	public String getGreaterMurdersSequenceBeforeDeath() {
+	public List<String> getGreaterMurdersSequenceBeforeDeath() {
+		List<String> list = new ArrayList<>();
 		
 		Comparator<Killer> greaterMurderSeq = (s1, s2) -> {
 			Integer seq = s1.getMurderSequence();
@@ -93,24 +94,51 @@ public class MatchResultRankingService implements DisplayMatchResults {
 		};
 		
 		Collections.sort(match.getKillers(), Collections.reverseOrder(greaterMurderSeq));
-
-		int index = match.getKillers().size() - 1;
-		Killer k = match.getKillers().get(index);
 		
-		return new String("Greater sequence murders killer name: " + k.getName() + " - greater sequence: ( " + k.getMurderSequence() + " )");
+		int control = match.getKillers().get(0).getMurderSequence();
+		
+		match.getKillers().forEach(k -> {
+			if(k.getMurderSequence() == control)
+				list.add("Greater sequence murders killer name: " + k.getName() + " - greater sequence: ( " + k.getMurderSequence() + " )");
+		});
+
+		return list;
 	}
 
 	@Override
-	public List<String> getAwardsEarnedRanking() {
+	public List<String> getAwardsEarnedByFiveMurders() {
 		List<String> awards = new ArrayList<>();
 		
 		Comparator<Killer> awardsComparator = (a1, a2) -> {
-			Integer award = a1.getAwardNumber();
-			return award.compareTo(a2.getAwardNumber());
+			Integer award = a1.getAwardFiveMurdersOneMinute();
+			return award.compareTo(a2.getAwardFiveMurdersOneMinute());
 		};
 
 		Collections.sort(match.getKillers(), Collections.reverseOrder(awardsComparator));
-		match.getKillers().forEach(k -> awards.add("Killer name: " + k.getName() + " awards earned: ( " + k.getAwardNumber() + ") ") );
+		
+		match.getKillers().forEach(k -> {
+			if(k.getAwardFiveMurdersOneMinute() > 0)
+				awards.add("Killer name: " + k.getName() + "   - awards earned by five murders in a minute ( " + k.getAwardFiveMurdersOneMinute() + " )");
+		});
+		
+		return awards;
+	}
+	
+	@Override
+	public List<String> getAwardsEarnedByMatchWithoutDeath() {
+		List<String> awards = new ArrayList<>();
+		
+		Comparator<Killer> awardsComparator = (a1, a2) -> {
+			Integer award = a1.getAwardMatchWithoutDeath();
+			return award.compareTo(a2.getAwardMatchWithoutDeath());
+		};
+
+		Collections.sort(match.getKillers(), Collections.reverseOrder(awardsComparator));
+		
+		match.getKillers().forEach(k -> {
+			if(k.getAwardMatchWithoutDeath() > 0)
+				awards.add("Killer name: " + k.getName() + "   - awards obtained by win a match without death ( " + k.getAwardMatchWithoutDeath() + " )");
+		});
 		
 		return awards;
 	}
