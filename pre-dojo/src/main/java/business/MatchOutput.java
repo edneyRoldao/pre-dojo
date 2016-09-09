@@ -13,6 +13,7 @@ import util.DateUtil;
 public class MatchOutput extends Match {
 
 	// Attributes
+	private int timeActionInterval;
 	private Killer killer01 = null;
 	private Killer killer02 = null;
 	private Weapon weapon = null;
@@ -21,21 +22,26 @@ public class MatchOutput extends Match {
 
 	
 	// Constructor
-	public MatchOutput(List<Killer> killers, List<Weapon> weapons) {
+	public MatchOutput(List<Killer> killers, List<Weapon> weapons, int timeActionInterval) {
 		setKillers(killers);
 		setWeapons(weapons);
 		setId(rd.nextInt(100000000));
+		this.timeActionInterval = timeActionInterval;
 	}
 
 	public String matchGenerator(int battlesNumber) {
 		
-		sb.append(DateUtil.getFormattedDate() + " - New match " + getId() + " has started \n");
+		String initMatch = DateUtil.getFormattedDate().toString() + " - New match " + getId() + " has started \n";
+		System.out.println(initMatch + "\n");
+		sb.append(initMatch);
 		addInterval();
 
 		for(int i = 0; i < battlesNumber; i++)
 			startBatle();
 		
-		sb.append(DateUtil.getFormattedDate() + " - Match " + getId() + " has ended \n");
+		String endMatch = DateUtil.getFormattedDate().toString() + " - Match " + getId() + " has ended \n";
+		System.out.println(endMatch);
+		sb.append(endMatch + "\n");
 		addInterval();
 		
 		return sb.toString();
@@ -68,7 +74,8 @@ public class MatchOutput extends Match {
 			
 			if(killer02.getDamagePoint() <= 0) {
 				String action = " - " + killer01.getName() + " killed " + killer02.getName() + " using " + weapon.getName() + "\n";
-				sb.append(DateUtil.getFormattedDate() + action);
+				System.out.println(action + "\n");
+				sb.append(DateUtil.getFormattedDate().toString() + action);
 				addInterval();
 				
 				Deadkillers.add(killer02);
@@ -92,7 +99,8 @@ public class MatchOutput extends Match {
 	 * Add an interval between each death
 	 */
 	private void addInterval() {
-		long interval = 1000 + rd.nextInt(6000);
+		
+		long interval = 1000 + rd.nextInt(timeActionInterval * 1000);
 		try {
 			Thread.sleep(interval);
 		} catch (InterruptedException e) {

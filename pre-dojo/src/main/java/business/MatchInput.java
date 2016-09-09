@@ -27,8 +27,8 @@ public class MatchInput extends Match {
 	private List<Killer> killers = new ArrayList<>();
 
 	// Constructor
-	public MatchInput(String filePath) {
-		List<String> list = ReadAndWriteFileUtil.readLogFile(filePath);
+	public MatchInput(String filePath, String fileName) {
+		List<String> list = ReadAndWriteFileUtil.readLogFile(filePath, fileName);
 		parser = new LogFileMatchParser(list);
 		dataList = parser.getParsedList();
 		setId(parser.retrieveMatchId());

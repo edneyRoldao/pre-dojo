@@ -19,9 +19,18 @@ public class ReadAndWriteFileUtil {
 	private static final Charset UTF8 = StandardCharsets.UTF_8;
 
 	
-	public static void writeLogFile(String filePath, String value) {
+	public static void writeLogFile(String filePath, String fileName, String value) {
 		
-		Path path = Paths.get(filePath);
+		if(!Files.exists(Paths.get(filePath))) {
+			try {
+				Files.createDirectories(Paths.get(filePath));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		String wholePath = filePath + "/" + fileName;
+		Path path = Paths.get(wholePath);
 		
 		try(BufferedWriter bw = Files.newBufferedWriter(path, UTF8)) {
 
@@ -33,10 +42,20 @@ public class ReadAndWriteFileUtil {
 		
 	}
 	
-	public static List<String> readLogFile(String filePath) {
+	public static List<String> readLogFile(String filePath, String fileName) {
 
+		if(!Files.exists(Paths.get(filePath))) {
+			try {
+				Files.createDirectories(Paths.get(filePath));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		String wholePath = filePath + "/" + fileName;
+		
 		List<String> list = new ArrayList<>();
-		Path path = Paths.get(filePath);
+		Path path = Paths.get(wholePath);
 		
 		try(BufferedReader br = Files.newBufferedReader(path, UTF8)) {
 

@@ -12,6 +12,9 @@ import models.Soldier;
 import models.Sword;
 import models.Weapon;
 
+/**
+ * @author Edney Roldao
+ */
 public class MockUtil {
 
 	public static List<Weapon> getWeaponList() {

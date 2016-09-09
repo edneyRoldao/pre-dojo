@@ -1,14 +1,14 @@
-package tests;
+package application;
 
 
 import business.MatchInput;
 import models.Killer;
 
-public class MatchInputTest {
+public class MatchInputSimulator {
 
 	public static void main(String[] args) {
 		
-		MatchInput match = new MatchInput("/Users/edneyroldao/workspace/JAVA/projects/pre-dojo/logFiles/log.txt");
+		MatchInput match = new MatchInput("/Users/edneyroldao/workspace/JAVA/projects/pre-dojo/logFiles/", "log.txt");
 		
 		System.out.println(match.getId());
 		
