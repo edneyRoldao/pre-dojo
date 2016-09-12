@@ -22,6 +22,9 @@
 					<li>Definir o nome do arquivo na classe AppConfig</li>
 					<li>Definir um intervalo de tempo (em segundos) para as ações (assassinatos) na classe AppConfig</li>
 					<li>Devemos definir também o tamanho (em linhas) de uma partida na classe AppConfig</li>
+					<li>Na consulta do log da partida, o formato do jogador WORLD foi modificado para #WORLD#</li>
+					<li>Podemos remover e/ou adicionar jogadores a partir das classes: KillersConfig e WeaponsConfig</li>
+					<li>Estou disponibilizando também os resultados da partida em formato Json em /pre-dojo/match/ranking.json</li>
 				</ul>
 			</div>
 		</div>

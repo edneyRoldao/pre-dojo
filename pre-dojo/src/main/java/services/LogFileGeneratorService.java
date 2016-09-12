@@ -10,8 +10,8 @@ import application.config.WeaponsConfig;
 import business.MatchGenerator;
 import models.Killer;
 import models.Weapon;
-import util.ReadFileUtil;
-import util.WriteFileUtil;
+import utils.ReadFileUtil;
+import utils.WriteFileUtil;
 
 /**
  * This is a service that will create a log file with randomly results.

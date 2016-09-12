@@ -22,6 +22,9 @@
                 <li style="margin-left: 40px;">
                     <a href='<spring:url value="/pre-dojo/log/partida/simular"/>'>Gerar Nova Partida</a>
                 </li>
+                <li style="margin-left: 40px;">
+                    <a href='<spring:url value="/pre-dojo/lista/participantes"/>'>Lista de Jogadores e Armas no Jogo</a>
+                </li>
             </ul>
         </div>
     </div>

@@ -11,9 +11,9 @@ import models.Killer;
 import models.Ninja;
 import models.Soldier;
 import parser.LogLineData;
+import utils.DateUtil;
+import utils.ReadFileUtil;
 import parser.LogFileMatchParser;
-import util.DateUtil;
-import util.ReadFileUtil;
 
 /**
  * List of the main things that this class does:

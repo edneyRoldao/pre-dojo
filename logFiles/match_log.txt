@@ -1,19 +1,14 @@
-11/09/2016 09:22:34 - New match 75894685 has started 
-11/09/2016 09:22:35 - The Undertaker killed <WORLD> using AK 47
-11/09/2016 09:22:37 - Kevin Owens killed Seth Rollins using AK 47
-11/09/2016 09:22:38 - Roman Reigns killed Kevin Owens using AK 47
-11/09/2016 09:22:40 - The Undertaker killed Roman Reigns using Masamune blade
-11/09/2016 09:22:41 - Roman Reigns killed <WORLD> using special knife
-11/09/2016 09:22:42 - Kevin Owens killed The Undertaker using C4
-11/09/2016 09:22:43 - Kevin Owens killed Roman Reigns using special knife
-11/09/2016 09:22:45 - Kevin Owens killed Seth Rollins using Masamune blade
-11/09/2016 09:22:47 - <WORLD> killed The Undertaker using Masamune blade
-11/09/2016 09:22:48 - Seth Rollins killed <WORLD> using AK 47
-11/09/2016 09:22:50 - Seth Rollins killed Roman Reigns using AK 47
-11/09/2016 09:22:51 - Kevin Owens killed Seth Rollins using AK 47
-11/09/2016 09:22:52 - Kevin Owens killed The Undertaker using Masamune blade
-11/09/2016 09:22:53 - <WORLD> killed Roman Reigns using special knife
-11/09/2016 09:22:54 - Seth Rollins killed Kevin Owens using AK 47
-11/09/2016 09:22:56 - <WORLD> killed Seth Rollins using AK 47
-11/09/2016 09:22:58 - Match 75894685 has ended 
-
+08/09/2016 11:15:01 - New match 52347104 has started
+08/09/2016 11:15:00 - Kevin Owens killed Roman Reigns using C4
+08/09/2016 11:15:05 - Roman Reigns killed The Undertaker using C4
+08/09/2016 11:15:10 - Kevin Owens killed Seth Rollins using AK 47
+08/09/2016 11:15:15 - Kevin Owens killed Roman Reigns using C4 
+08/09/2016 11:15:20 - Seth Rollins killed Roman Reigns using AK 47
+08/09/2016 11:15:25 - Kevin Owens killed Seth Rollins using AK 47
+08/09/2016 11:15:40 - <WORLD> killed Dean Ambrose using AK 47 
+08/09/2016 11:15:59 - Kevin Owens killed The Undertaker using AK 47
+08/09/2016 11:16:17 - <WORLD> killed Roman Reigns using AK 47 
+08/09/2016 11:16:24 - Seth Rollins killed The Undertaker using C4
+08/09/2016 11:16:17 - <WORLD> killed Dean Ambrose using AK 47
+08/09/2016 11:17:17 - Dean Ambrose killed <WORLD> using AK 47
+08/09/2016 11:19:01 - Match 52347104 has ended

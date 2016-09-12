@@ -13,7 +13,7 @@ import application.config.AppConfig;
 import business.MatchResultObject;
 import junitUtil.LogFileUtil;
 import services.FillMatchResultObjectService;
-import util.WriteFileUtil;
+import utils.WriteFileUtil;
 
 /**
  * 	 There are tests that might return more than one result, like the test where I'm checking 

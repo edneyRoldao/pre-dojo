@@ -11,13 +11,14 @@
 			<div class="jumbotron containerApp">
 				<div class="container">
 					<h2>Resultado do Arquivo de Log da Partida (Original)</h2>
+					<h6> Por questôes de segurança da página, a exibição do jogador WORLD está assim: #WORLD# </h6>
 				</div>
 			</div>
 		</header>
 		<div class="container">
 			<div class="bodyIndex">
 				<c:forEach items="${logList}" var="line">
-					<h6>${line}</h6>
+					<h6 >${line}</h6>
 				</c:forEach>
 			</div>
 		</div>

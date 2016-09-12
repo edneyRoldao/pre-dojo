@@ -7,7 +7,7 @@ import java.util.Random;
 import application.config.AppConfig;
 import models.Killer;
 import models.Weapon;
-import util.DateUtil;
+import utils.DateUtil;
 
 /**
  * @author edneyroldao

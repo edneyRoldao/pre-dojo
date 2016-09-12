@@ -6,12 +6,12 @@ package application.config;
  */
 public class AppConfig {
 
-	public static final String PATH = "/Users/edneyroldao/workspace/JAVA/projects/pre-dojo/logFiles";
+	public static final String PATH = "CAMINHO PARA O ARQUIVO";
 	
-	public static final String FILE_NAME = "match_log.txt";
+	public static final String FILE_NAME = "NOME DO ARQUIVO";
 	
-	public static final int INTERVAL_ACTIONS_IN_SECONDS = 1;
+	public static final int INTERVAL_ACTIONS_IN_SECONDS = 0;
 	
-	public static final int WRESTLE_NUMBER = 4;
+	public static final int WRESTLE_NUMBER = 0;
 	
 }

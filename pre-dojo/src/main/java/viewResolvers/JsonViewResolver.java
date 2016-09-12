@@ -1,4 +1,4 @@
-package viewResolver;
+package viewResolvers;
 
 import java.util.Locale;
 

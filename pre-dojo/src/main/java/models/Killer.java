@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import interfaces.Ability;
-import util.MapUtil;
+import utils.MapUtil;
 
 /**
  * @author edneyroldao
