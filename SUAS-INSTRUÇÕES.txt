@@ -9,13 +9,17 @@ AMBIENTE
 
 SOBRE O PROJETO
 ===============
-- Eu criei um simulador de partidas que cria um arquivo de log idêntico ao apresentado no           desafio. Os resultados são gerados aleatoriamente.
+- Eu criei um simulador de partidas que cria um arquivo de log idêntico ao apresentado 
+no desafio. Os resultados são gerados aleatoriamente.
 
-- Na apresentação do ranking, eu implementei tudo, incluindo a parte Bônus. Todos os resultados podem ser visualizados via console.
+- Na apresentação do ranking, eu implementei tudo, incluindo a parte Bônus. Todos os 
+resultados podem ser visualizados via console.
 
 - Eu criei testes unitários para todas as funcionalidades solicitadas.
 
-- Criei uma parte web para apresentação dos resultados de forma amigável, além disso, é possível gerar novas partidas aleatórias, consultar o arquivo de log gerado e verificar os jogadores e armas que são utilizados nas partidas.
+- Criei uma parte web para apresentação dos resultados de forma amigável, além disso, é possível 
+gerar novas partidas aleatórias, consultar o arquivo de log gerado e verificar os jogadores e armas 
+que são utilizados nas partidas.
 
 CONFIGURAÇÕES
 =============
@@ -24,19 +28,24 @@ CONFIGURAÇÕES
 	
 	02 - FILE_NAME (nome e formato do arquivo)
 
-	03 - INTERVAL_ACTIONS_IN_SECONDS (esta constante define o tempo de intervalo entre as ações no jogo, ou seja, os assassinatos. O valor é em segundos, ele que define o range que é passado no Objeto Random. Portando o tempo entre as ações são aleatórios de acordo com o range)
+	03 - INTERVAL_ACTIONS_IN_SECONDS (esta constante define o tempo de intervalo entre as ações no jogo, ou seja, os 
+	assassinatos. O valor é em segundos, ele que define o range que é passado no Objeto Random. Portando o tempo entre 
+	as ações são aleatórios de acordo com o range)
 
-	04 - WRESTLE_NUMBER (define o tamanho do arquivo que será gerado, esse valor é passado para a classe que gera a partida e ela utiliza em um laço. 5 arquivo pequeno, 10 arquivo médio e 15 cria um arquivo bem grande)
+	04 - WRESTLE_NUMBER (define o tamanho do arquivo que será gerado, esse valor é passado para a classe que gera a partida 
+	e ela utiliza em um laço. 5 arquivo pequeno, 10 arquivo médio e 15 cria um arquivo bem grande)
 
 - É possível adicionar e remover jogadores e armas nas classes KillersConfig e WeaponsConfig.
 
 - A classe CreateFileLogSimulator possuí um método main para a visualização da geração do arquivo de log
 
-- A classe MatchRankingConsoleSimulator também possuí um método main onde é possível consultar os resultados do ranking, baseado na leitura do arquivo gerado acima.
+- A classe MatchRankingConsoleSimulator também possuí um método main onde é possível consultar os resultados do ranking, 
+baseado na leitura do arquivo gerado acima.
 
 - Os testes unitários estão na classe MatchResultServiceTest
 
-- Para subir a aplicação web escrita em spring pelo servido configurado no pom.xml jetty, basta rodar como maven build e no campo goal inserir o comando: jetty:run.
+- Para subir a aplicação web escrita em spring pelo servido configurado no pom.xml jetty, basta rodar como maven build e 
+no campo goal inserir o comando: jetty:run.
 
 - Na página de resultado do ranking, é possível expor o objeto com os resultados no formato Json.
 basta adicioar .json no final da url.
