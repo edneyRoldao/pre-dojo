@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import exceptions.LogFilePatternException;
+
 /**
  * @author edneyroldao
  */
@@ -15,6 +17,17 @@ public class LogFileMatchParser {
 	
 	// Constructor
 	public LogFileMatchParser(List<String> logResultList) {
+		
+		boolean isRightPattern = CheckPattern.checkPatternLogFile(logResultList);
+		
+		if(!isRightPattern) {
+			try {
+				throw new LogFilePatternException("The pattern from log file is wrong");
+			} catch (LogFilePatternException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		this.logResultList = logResultList;
 	}
 	

@@ -1,0 +1,129 @@
+.footer{
+	width: 400px;
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.footer img{
+	width: 25px;
+	height: 25px;
+}
+
+.novoBtn {
+	margin-left: 390px;
+	margin-bottom: 20px;
+}
+
+.bodyIndex {
+	margin-top: 50px;
+	margin-bottom: 100px;
+	margin-left: 330px;
+}
+
+.showSuccess {
+	display: block;
+	margin-left: 390px;
+	margin-right: 230px;
+	width: 400px;
+}
+
+.hideSuccess {
+	display: none;
+}
+
+.indexBtn {
+	text-align: center;
+	margin-left: 200px;
+}
+
+.errorMessages {
+	color: red;
+	font-weight: bold;
+}
+
+.btn-file {
+	position:absolute;
+	z-index:2;
+	top:0;
+	left:0;
+	filter: alpha(opacity=0);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	opacity:0;
+	background-color:transparent;
+	color:transparent;
+}
+
+.btnValores {
+	margin-top: 15px;
+	height: 80px;
+	background-color: gray;
+}
+
+.radioValores {
+	margin-top: 10px;
+}
+
+.radioValores2 {
+	height: 60px;
+}
+
+.radioValores3 {
+	margin-top: -15px;
+}
+
+.radioValores4 {
+	margin-top: 15px;
+}
+
+.radioValores4 input {
+	width: 160px;
+	height: 50px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.headerIndex {
+	margin-top: 15px;
+	margin-left: 100px;
+	margin-right: 100px;
+	text-align: center;
+}
+
+.cadastro-form {
+	margin-left: 35px;
+	margin-right: 35px;
+}
+
+.containerApp {
+	margin-top: 70px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1150px;
+	text-align: center;
+}
+
+.imgDetalhes {
+	width: 280px;
+	height: 350px;
+}
+
+.menu {
+	margin-top: 5px;
+}
+
+.formUser {
+	margin-top: 200px;
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 200px;
+}
+
+.formLogin {
+	margin-top: 50px;
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 100px;
+}

@@ -2,7 +2,9 @@ package business;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import application.config.AppConfig;
 import models.Killer;
 import models.Weapon;
 import util.DateUtil;
@@ -10,36 +12,39 @@ import util.DateUtil;
 /**
  * @author edneyroldao
  */
-public class MatchOutput extends Match {
+public class MatchGenerator {
 
 	// Attributes
-	private int timeActionInterval;
-	private Killer killer01 = null;
-	private Killer killer02 = null;
-	private Weapon weapon = null;
+	private int matchId;
 	private int index01 = 0;
 	private int index02 = 0;
+	private List<Killer> killers;
+	private List<Weapon> weapons; 
+	private Weapon weapon = null;
+	private Killer killer01 = null;
+	private Killer killer02 = null;
+	private Random rd = new Random();
+	private StringBuilder sb = new StringBuilder();
 
 	
 	// Constructor
-	public MatchOutput(List<Killer> killers, List<Weapon> weapons, int timeActionInterval) {
-		setKillers(killers);
-		setWeapons(weapons);
-		setId(rd.nextInt(100000000));
-		this.timeActionInterval = timeActionInterval;
+	public MatchGenerator(List<Killer> killers, List<Weapon> weapons) {
+		this.killers = killers;
+		this.weapons = weapons;
+		matchId = rd.nextInt(100000000);
 	}
 
-	public String matchGenerator(int battlesNumber) {
+	public String matchGenerator() {
 		
-		String initMatch = DateUtil.getFormattedDate().toString() + " - New match " + getId() + " has started \n";
+		String initMatch = DateUtil.getFormattedDate().toString() + " - New match " + matchId + " has started \n";
 		System.out.println(initMatch + "\n");
 		sb.append(initMatch);
 		addInterval();
 
-		for(int i = 0; i < battlesNumber; i++)
+		for(int i = 0; i < AppConfig.WRESTLE_NUMBER; i++)
 			startBatle();
 		
-		String endMatch = DateUtil.getFormattedDate().toString() + " - Match " + getId() + " has ended \n";
+		String endMatch = DateUtil.getFormattedDate().toString() + " - Match " + matchId + " has ended \n";
 		System.out.println(endMatch);
 		sb.append(endMatch + "\n");
 		addInterval();
@@ -56,12 +61,12 @@ public class MatchOutput extends Match {
 		
 		List<Killer> Deadkillers = new ArrayList<>();
 		
-		while(getKillers().size() > 1) {
+		while(killers.size() > 1) {
 			
-			index01 = rd.nextInt(getKillers().size());
-			index02 = rd.nextInt(getKillers().size());
-			killer01 = getKillers().get(index01);
-			killer02 = getKillers().get(index02);
+			index01 = rd.nextInt(killers.size());
+			index02 = rd.nextInt(killers.size());
+			killer01 = killers.get(index01);
+			killer02 = killers.get(index02);
 			weapon = getWeaponRandomly();
 			
 			if(index01 != index02) {
@@ -72,18 +77,19 @@ public class MatchOutput extends Match {
 				System.out.println(" with " + weapon.getName() + " damage: " + attackPoints);
 			}
 			
-			if(killer02.getDamagePoint() <= 0) {
-				String action = DateUtil.getFormattedDate().toString() + " - " + killer01.getName() + " killed " + killer02.getName() + " using " + weapon.getName() + "\n";
+			if(killer02.getDamagePoint() <= 0 && !killer01.getName().equals(killer02.getName())) {
+				String date = DateUtil.getFormattedDate().toString();
+				String action = date + " - " + killer01.getName() + " killed " + killer02.getName() + " using " + weapon.getName() + "\n";
 				System.out.println(action + "\n");
 				sb.append(action);
 				addInterval();
 				
 				Deadkillers.add(killer02);
-				getKillers().remove(killer02);
+				killers.remove(killer02);
 			}
 		}
 
-		getKillers().addAll(Deadkillers);
+		killers.addAll(Deadkillers);
 	}
 	
 	/**
@@ -91,7 +97,7 @@ public class MatchOutput extends Match {
 	 * @return Weapon from a list randomly
 	 */
 	private Weapon getWeaponRandomly() {
-		return getWeapons().get(rd.nextInt(getWeapons().size()));
+		return weapons.get(rd.nextInt(weapons.size()));
 	}
 	
 	/**
@@ -99,7 +105,7 @@ public class MatchOutput extends Match {
 	 */
 	private void addInterval() {
 		
-		long interval = 1000 + rd.nextInt(timeActionInterval * 1000);
+		long interval = 1000 + rd.nextInt(AppConfig.INTERVAL_ACTIONS_IN_SECONDS * 1000);
 		try {
 			Thread.sleep(interval);
 		} catch (InterruptedException e) {

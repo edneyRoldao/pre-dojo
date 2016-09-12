@@ -6,40 +6,57 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import application.config.AppConfig;
 import models.Killer;
 import models.Ninja;
 import models.Soldier;
 import parser.LogLineData;
 import parser.LogFileMatchParser;
 import util.DateUtil;
-import util.ReadAndWriteFileUtil;
+import util.ReadFileUtil;
 
 /**
+ * List of the main things that this class does:
+ * 
+ * Retrieving results from a log file.
+ * Instantiating parser object.
+ * Getting a data list parsed from a file log.
+ * Calling methods lead with Killers and Weapons objects (population)  
+ * 
  * @author edneyroldao
  */
-public class MatchInput extends Match {
+public class MatchCompiler {
 
 	// Attributes
+	private int matchId;
 	private final List<LogLineData> dataList;
-	private final LogFileMatchParser parser;
+	private final LogFileMatchParser matchParser;
 	private List<Killer> killers = new ArrayList<>();
 
 	// Constructor
-	public MatchInput(String filePath, String fileName) {
-		List<String> list = ReadAndWriteFileUtil.readLogFile(filePath, fileName);
-		parser = new LogFileMatchParser(list);
-		dataList = parser.getParsedList();
-		setId(parser.retrieveMatchId());
+	public MatchCompiler() {
+		List<String> logFileResults = new ArrayList<>();
+		
+		// Retrieving results from a log file  
+		logFileResults = ReadFileUtil.readLogFile(AppConfig.PATH, AppConfig.FILE_NAME);
+		
+		// Instantiating parser object
+		matchParser = new LogFileMatchParser(logFileResults);
+		
+		// Getting a data list parsed from a file log
+		dataList = matchParser.getParsedList();
+		
+		// Calling methods lead with Killers and Weapons objects (population)
 		posConstruct();
 	}
 
 	private void posConstruct() {
+		matchId = matchParser.retrieveMatchId();
 		countMurdersAndWeapons();
 		countDeaths();
 		addAwardKillerNotDead();
 		setGreatMurderSequence();
 		addAwardFiveMurdersInOneMinute();
-		setKillers(killers);
 		addPreferedWeapon();
 	}
 
@@ -247,6 +264,14 @@ public class MatchInput extends Match {
 			return Integer.valueOf(number);
 		}
 		return 0;
+	}
+	
+	public int getMatchId() {
+		return matchId;
+	}
+	
+	public List<Killer> getKillers() {
+		return killers;
 	}
 	
 }
